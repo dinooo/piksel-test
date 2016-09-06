@@ -19,16 +19,20 @@ public class Product {
     @NotNull
     private Double discountPrice;
 
+    @JoinColumn(name = "seller_id")
+    private Long seller_id;
+
 
     public Product() {
     }
 
-    public Product(Long id, String name, String currency, Double regularPrice, Double discountPrice) {
+    public Product(Long id, String name, String currency, Double regularPrice, Double discountPrice, Long seller_id) {
         this.id = id;
         this.name = name;
         this.currency = currency;
         this.regularPrice = regularPrice;
         this.discountPrice = discountPrice;
+        this.seller_id = seller_id;
     }
     public Long getId() {
         return id;
@@ -70,4 +74,11 @@ public class Product {
         this.currency = currency;
     }
 
+    public Long getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(Long seller_id) {
+        this.seller_id = seller_id;
+    }
 }
