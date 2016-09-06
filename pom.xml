@@ -75,6 +75,7 @@
             <version>${jackson-version}</version>
         </dependency>
         <!-- End Jackson -->
+
     </dependencies>
 
     <build>

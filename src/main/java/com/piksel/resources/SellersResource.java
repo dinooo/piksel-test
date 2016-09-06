@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import javax.print.attribute.standard.Media;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -60,5 +61,32 @@ public class SellersResource {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return seller;
+    }
+
+    @POST
+    public Seller save(@Valid Seller seller) {
+        return sellerDao.save(seller);
+    }
+
+    @PUT
+    @Path("{id}")
+    public Seller update(@PathParam("id")long id, @Valid Seller seller) {
+        if(sellerDao.findOne(id) == null){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }else {
+            seller.setId(id);
+            return sellerDao.save(seller);
+        }
+    }
+
+    @DELETE
+    @Path("{id}")
+    public void delete(@PathParam("id")long id) {
+        Seller seller = sellerDao.findOne(id);
+        if(seller == null){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }else {
+            sellerDao.delete(seller);
+        }
     }
 }
