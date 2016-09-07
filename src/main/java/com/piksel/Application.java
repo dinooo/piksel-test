@@ -1,6 +1,7 @@
 package com.piksel;
 
 import com.piksel.config.JerseyInitialization;
+import com.piksel.secure.AuthenticationTokenProcessingFilter;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,4 +25,10 @@ public class Application {
         registration.addInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, JerseyInitialization.class.getName());
         return registration;
     }
+
+    @Bean
+    public AuthenticationTokenProcessingFilter authenticationFilter(){
+        return new AuthenticationTokenProcessingFilter();
+    }
+
 }
